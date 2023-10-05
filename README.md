@@ -19,6 +19,8 @@ To get started with this project, follow these steps:
 2. Install the dependencies using `pnpm install`.
 3. Run the development server using `pnpm dev`.
 4. Build the project using `pnpm build`.
+5. Build the project using `npm run tauri build`.
+6. Run the development server using `npm run tauri dev`.
 
 ## Contributing
 
