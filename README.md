@@ -1,4 +1,4 @@
-# tauri-vite-vue-tailwind
+# Browser to desktop app
 **Tauri-vite-vue-tailwindcss app structure** is a basic project template that provides a starting point for building desktop and mobile applications with a web frontend. It is built using Tauri, Vue, Vite, and Tailwind CSS.
 
 
