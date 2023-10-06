@@ -1,6 +1,10 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import DrawerMenu from './DrawerMenu.vue';
+// fs file write txt
+import { writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
+import { downloadDir } from '@tauri-apps/api/path';
+import {open} from '@tauri-apps/api/shell';
 
 /**
  * !check if drawer element hidden or not, then take action accordingly
@@ -16,6 +20,15 @@ const drawerMove = () => {
     drawer.classList.add('hidden');
   }
 };
+
+const yazDostum = async ()=>{
+  const downloadDirPath = await downloadDir();
+  // Write a text file to the `$APPCONFIG/app.conf` path
+await writeTextFile('app.txt', 'file contents deneme', { dir: BaseDirectory.Download });
+
+await open(downloadDirPath);
+}
+
 </script>
 
 <template>
@@ -44,6 +57,7 @@ const drawerMove = () => {
               <div
                 class="flex w-full flex-col items-start justify-center space-x-6 text-center md:mt-0 md:w-2/3 md:flex-row md:items-center lg:space-x-8"
               >
+              <button @click="yazDostum" class="hover:border p-2 rounded-md">Tıkla</button>
                 <RouterLink
                   to="/"
                   class="mx-0 ml-6 inline-block w-full py-2 text-left font-medium text-indigo-600 md:mx-2 md:ml-0 md:w-auto md:px-0 md:text-center lg:mx-3"
