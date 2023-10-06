@@ -1,10 +1,10 @@
 <script setup>
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import DrawerMenu from './DrawerMenu.vue';
+
 // fs file write txt
-import { writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
-import { downloadDir } from '@tauri-apps/api/path';
-import {open} from '@tauri-apps/api/shell';
+import { writeTextFile, readTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 
 /**
  * !check if drawer element hidden or not, then take action accordingly
@@ -20,18 +20,19 @@ const drawerMove = () => {
     drawer.classList.add('hidden');
   }
 };
-
+let textin = ref([]);
 const yazDostum = async ()=>{
-  const downloadDirPath = await downloadDir();
   // Write a text file to the `$APPCONFIG/app.conf` path
-await writeTextFile('app.txt', 'file contents deneme', { dir: BaseDirectory.Download });
-
-await open(downloadDirPath);
+await writeTextFile('app1.txt', JSON.stringify(textin.value) , { dir: BaseDirectory.Download });
+const contents = await readTextFile('app.txt', { dir: BaseDirectory.Download });
+textin.value.push(contents);
+console.log(contents);
 }
 
 </script>
 
 <template>
+  <div class="w-full text-5xl text-white text-center bg-red-900">deneme {{ textin }}</div>
   <section class="sticky top-0 z-20 w-full bg-white px-6 antialiased">
     <div class="mx-auto max-w-7xl">
       <nav class="relative z-50 h-24 select-none">
