@@ -1,4 +1,32 @@
+
+<script setup>
+import { getClient, ResponseType } from '@tauri-apps/api/http';
+import { onMounted, ref } from 'vue';
+
+
+const margaritas = ref([])
+onMounted(async() => {
+const client = await getClient();
+const response = await client.get('http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita', {
+  timeout: 30,
+  // the expected response type
+  responseType: ResponseType.JSON
+});
+margaritas.value= response.data;
+console.log(response.data);
+});
+
+
+</script>
 <template>
+  
+  <ul>
+    <li v-for="(item) in margaritas.drinks" :key="item">
+    {{ item.strDrink }}
+    <img :src="item.strDrinkThumb
+" alt="">
+    </li>
+  </ul>
     <div class="py-4 text-white">
       <div class="container mx-auto my-12 flex flex-col md:my-36 md:flex-row">
         <div class="flex w-full flex-col p-8 lg:w-2/5">

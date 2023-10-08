@@ -16,6 +16,11 @@
       "path": {
         "all": true
       },
+      "http": {
+        "all": true, 
+        "request": true,
+        "scope": ["http://**"]
+      },
       "fs": {
         "scope": ["**"],
         "all": true,
@@ -53,7 +58,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "tauri-app",
+        "title": "oto-car",
         "width": 800,
         "height": 600
       }
