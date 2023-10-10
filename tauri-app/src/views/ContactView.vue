@@ -2,11 +2,15 @@
 import { getClient, ResponseType } from "@tauri-apps/api/http";
 import { onMounted, ref } from "vue";
 
+const apiRoute = import.meta.env.VITE_APP_ROUTE;
+const apiKey = import.meta.env.VITE_APP_API_KEY;
 const margaritas = ref([]);
 onMounted(async () => {
+  console.log(apiKey, apiRoute, import.meta.env.VITE_APP_FULL);
+
   const client = await getClient();
   const response = await client.get(
-    "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita",
+    `${apiRoute}/${apiKey}/search.php?s=margarita`,
     {
       timeout: 30,
       // the expected response type
@@ -18,12 +22,11 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <ul>
+  <ul class="w-full flex flex-wrap gap-4 justify-center items-center">
     <li
       v-for="item in margaritas.drinks"
       :key="item"
-      class="flex flex-wrap gap-4 w-full justify-center
-      items-center"
+      class="flex flex-wrap gap-4 justify-center items-center"
     >
       <div>
         {{ item.strDrink }}
